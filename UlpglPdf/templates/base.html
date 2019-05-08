@@ -1,0 +1,286 @@
+{% load staticfiles bootstrap4 %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" ">
+    <meta name="author" content="Prémices NZANZU">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+
+
+    <!-- Custom styles for this template 
+    <link href="css/creative.min.css" rel="stylesheet">-->
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <div class="navbar-header ">
+
+            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+            <div class="cms-toolbar-item-logo header-a-logo col-md-3"><a href="{% url 'blank' %}"><img
+                    src="{% static 'images/ulpgl.png' %}" width="50" alt="logo"></a></div>
+
+            <div class="col-md-9"><a class="navbar-brand text-right" href="{% url 'blank' %}">ULPGL
+                <small>Ebooks</small>
+            </a></div>
+
+
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="about.html">A propos</a>
+                </li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}">Se Loger</a>
+                    </li>
+                {% endif %}
+                <li><a href="https://ulpgl.net">ulpgl.net</a>
+                </li>
+                <li><a href="{% url 'upload' %}">Uploader</a>
+                </li>
+
+                <li><a href="conditions.html">Conditions d'utilisation</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for choix in choix %}
+                            <li><a href="{% url 'details' choix.categorie %}">{{ choix.categorie }}</a></li>
+                        {% endfor %}
+
+
+                    </ul>
+                </li>
+
+                <li>
+                    <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Rechercher" name="q">
+                            <button class="btn btn-default small" type="submit"><i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+{% block nav_down %}
+
+{% endblock %}
+
+{% block content %}
+    <div id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class=" col-lg-12"><img src="{% static 'images/download_.jpeg' %}" alt=""></div>
+                <div class="carousel-caption">
+                    <h1>Le framework django</h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                <div class="carousel-caption">
+                    <h1>Le droit civil</h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                <div class="carousel-caption">
+                    <h1>La vie de jesus <a href="http://startbootstrap.com"> </a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-check-circle"></i> 3 nouveaux livres pour la faculté de droit</h3>
+                    <p>Le <a href="http://startbootstrap.com">Doit civil </a> par jean jacques, les <a
+                            href="http://getbootstrap.com">acteurs politiques en RDC</a></p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-pencil"></i> 3 Ebooks &amp; pdf mis à jour</h3>
+                    <p> Tous les livres sont disponibles en mode lecture, il faut seument avoir l'autoorisation de le
+                        lire.</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h3><i class="fa fa-folder-open"></i>Deux nouvelles catégories introduites </h3>
+                    <p>Le departement de genie informatique possède desormais sa catégorie appart</p>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section-colored text-center">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Ebooks Ulpgl : Une catalogue cklaire &amp; et Simple à utiliser</h2>
+                    <p>des varietés de ebooks disponibles </p>
+                    <hr>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Choix de catégories selon la faculté </h2>
+                    <hr>
+                </div>
+                {% for choix in choix %}
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="text">faculté de {{ choix.categorie }} {{ choix.items }} livres </div>
+                        {% if user.is_authenticated %}
+                            {% if choix.cover_url %}
+                                <a href="{% url 'details' choix.categorie %}">
+                                    <img class="img-responsive img-home-portfolio" src="{{ choix.cover_url }} " style="width: 200px;">
+                                </a>
+                            {% else %}
+                                <div class=" space " style="padding: 20px;"></div>
+                                <a href="{% url 'details' choix.categorie %}">
+                                    <span class="text-muted">No cover</span></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'login' %}">
+                                <img class="img-responsive img-home-portfolio"
+                                     src="{{ choix.cover_url }}">
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+
+
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section-colored">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>Ulpgl Ebooks</h2>
+                    <ul>
+                        <li>Format pdf</li>
+                        <li>Avec images integrés</li>
+                        <li>Multi language</li>
+                        <li>Téléchargement possible</li>
+                        <li>Pas de restriction sur la taille</li>
+                        <li>100% <strong>Simple</strong> à utiliser</li>
+                        <li>....</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <img class="img-responsive" src="{% static 'images/download.jpeg' %}">
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section-colored -->
+
+{% endblock content %}
+
+<div class="container">
+
+    <hr>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <p>Copyright &copy; Ulpgl 2018</p>
+                    <p>Designed by Prémices NZANZU</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<!-- JavaScript -->
+<script src="{% static 'js/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/modern-business.js' %}"></script>
+
+</body>
+
+</html>
+    

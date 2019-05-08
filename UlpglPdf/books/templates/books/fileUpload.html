@@ -1,0 +1,34 @@
+{% extends "_base_.html" %}
+{% load bootstrap4 crispy_forms_tags %}
+{% block content %}
+    <div class="space"></div>
+
+    <div class="row">
+
+        <div class="container ">
+            <div class=" col-md-4 col-md-offset-4">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="form-group row center-block">
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                        <a href="#" class="btn btn-primary col-md-offset-2">Retourner</a>
+                    </div>
+
+
+                </form>
+                {% if url %}
+                    <div>fichier bien chargé. cliquez <a href="{{ url }}"> ici </a> pour afficher</div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="space"></div>
+    <div class="space"></div>
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends '_base_.html' %}
+{% load bootstrap4 %}
+
+
+
+{% block content %}
+
+    <div class="row">
+
+
+
+    {% if next %}
+        <div class="col-md-offset-2 col-md-7"><h3>page inaccessible</h3></div>
+    {% endif %}
+    {% if valide %}Votre message a bien été envoyé !{% endif %}
+
+        <div class="col-md-offset-2 col-md-7"><h3>veuillez vous {% if form.errors %}re{% endif %}connecter</h3>
+        </div>
+
+        <form action="#" method="POST" class="form col-md-5 col-md-offset-2">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+
+</form>
+    {{ form.errors }}
+        <div class="space"></div>
+    </div>
+{% endblock %}
